@@ -2,18 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-.perspective-1000 {
+.card {
   perspective: 1000px;
+  height: 400px;
 }
 
-.transform-style-3d {
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
   transform-style: preserve-3d;
 }
 
-.backface-hidden {
-  backface-visibility: hidden;
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
 }
 
-.rotate-y-180 {
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-back {
   transform: rotateY(180deg);
+}
+
+.sentence-reveal {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.sentence-reveal.expanded {
+  max-height: 200px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.hover-scale {
+  transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
 }
